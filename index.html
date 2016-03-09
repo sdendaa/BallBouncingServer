@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" /> <!-- reset css -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+<style>
+    body{ background-color: ivory; padding:10px; }
+    canvas{border:1px solid red;}
+    p{font-size:24px;}
+</style>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var dc     = canvas.getContext("2d");
+var angle = 0;
+var x = canvas.width;
+var y = canvas.height;
+window.setInterval(function(){
+    angle = (angle + 1) % 360;
+    dc.clearRect(0, 0, canvas.width, canvas.height);
+
+    dc.save();
+    dc.fillStyle = "#DDDDDD";
+
+    dc.translate(x/2,y);
+    dc.rotate( angle*Math.PI/270 );  // rotate 90 degrees
+    dc.translate(0,0);
+
+    dc.beginPath();
+    dc.moveTo(-x/16, 0);
+    dc.lineTo(-x, y/2);
+    dc.lineTo(-x/2,y);
+    dc.lineTo(-0,y/16);
+    dc.closePath();
+    dc.fill();
+
+    dc.restore();
+}, 20);
+</script>
+</head>
+
+<body>
+    <p>Regular polygons (3-8 sides)</p><br/>
+    <p>Unmoving anchor point is green</p><br/>
+    <p>Burst point is yellow</p><br/>
+    <canvas id="canvas" width=300 height=350></canvas>
+</body>
+</html>
